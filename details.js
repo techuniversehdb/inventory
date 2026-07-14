@@ -17,10 +17,13 @@ async function loadProduct() {
         const response = await fetch(API_URL);
         const text = await response.text();
 
-        // Remove Google Visualization wrapper
-        const json = JSON.parse(
-            text.substring(47).slice(0, -2)
+        // Remove Google Visualization wrapper (parsed safely instead
+        // of relying on a fixed character offset)
+        const jsonText = text.substring(
+            text.indexOf("{"),
+            text.lastIndexOf("}") + 1
         );
+        const json = JSON.parse(jsonText);
 
         const rows = json.table.rows;
         const cols = json.table.cols;
@@ -81,7 +84,7 @@ function showProduct(){
         CURRENCY + product.Price;
 
     document.getElementById("phoneImage").src =
-        IMAGE_FOLDER + (product.Image || "no-image.webp");
+        product.Image ? IMAGE_FOLDER + product.Image : DEFAULT_IMAGE;
 
     document.getElementById("phoneImage").alt =
         product.Model;

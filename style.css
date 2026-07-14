@@ -87,6 +87,22 @@ header p{
     color:white;
 }
 
+/* Sort */
+
+.sort-box{
+    padding:0 15px 15px;
+}
+
+.sort-box select{
+    padding:10px 14px;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+    background:white;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    cursor:pointer;
+}
+
 /* Product Grid */
 
 .products{

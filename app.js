@@ -18,10 +18,14 @@ async function loadProducts() {
         const response = await fetch(API_URL);
         const text = await response.text();
 
-        // Google Visualization JSON
-        const json = JSON.parse(
-            text.substring(47).slice(0, -2)
+        // Google Visualization JSON (strip the wrapper safely,
+        // instead of assuming a fixed offset which can break if
+        // Google changes the response format slightly)
+        const jsonText = text.substring(
+            text.indexOf("{"),
+            text.lastIndexOf("}") + 1
         );
+        const json = JSON.parse(jsonText);
 
         const cols = json.table.cols;
         const rows = json.table.rows;
@@ -44,6 +48,12 @@ async function loadProducts() {
         filteredProducts = [...products];
 
         renderProducts(filteredProducts);
+
+        // Set up brand filter buttons, search box, and sort dropdown
+        // now that we actually have product data to work with
+        createBrandFilters();
+        initializeSearch();
+        initializeSorting();
 
     } catch (error) {
 
@@ -278,7 +288,9 @@ function initializeSorting() {
 
             default:
 
-                filteredProducts=[...products];
+                // Leave filteredProducts as-is so any active
+                // brand filter / search term isn't discarded
+                break;
 
         }
 
