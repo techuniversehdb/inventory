@@ -8,7 +8,7 @@
 // ==========================
 
 // Paste only the Spreadsheet ID here
-const SHEET_ID = "YOUR_GOOGLE_SHEET_ID";
+const SHEET_ID = "149m9cI34x9vR7aXfvXflhUd3MNx-1_JzKv78j5Uxoag";
 
 // Sheet Name
 const SHEET_NAME = "Products";
