@@ -19,5 +19,10 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "id": "/",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
   ]
 }
